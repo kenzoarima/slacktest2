@@ -114,7 +114,15 @@ app.event('app_mention', async ({ event, say, client }) => {
       //console.log('New Relic MCP response:', JSON.stringify(mcpResult, null, 2));
       console.log('New Relic MCP response:', JSON.stringify(mcpResult.result.structuredContent.result));
       mcpReplyMessage = mcpResult.result.structuredContent.result;
-      await say(mcpReplyMessage);
+      //await say(mcpReplyMessage);
+      await say({
+        "blocks": [
+          {
+            "type": "markdown",
+            "text": mcpReplyMessage
+          }
+        ]
+      });
     } catch (error) {
       console.error('Failed to call New Relic MCP:', error);
       await say(`${userMessage} back at you!`);
